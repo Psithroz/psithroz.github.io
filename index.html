@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Timotey Lamotte — Portfolio cyber</title>
+<meta name="description" content="Portfolio de Timotey Lamotte, étudiant BTS SIO SISR en alternance, orienté cybersécurité : projets, compétences, parcours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: sobre, technique, confiant — un dossier de candidature qu'on lit en 30 secondes
+   IDEA: un schéma réseau d'infrastructure, comme ceux qu'on dessine en BTS SISR
+   PICTURE: topologie LAN → pare-feu → DMZ, paquets qui circulent, un paquet bloqué
+   COLOUR and TYPE: vert profond #00463c, blanc, lime-blanc #e6f5c8, corail #ff6f59 ; Inter Tight + Inter
+   LAYOUT: héros plein écran vert, puis bandes blanches : profil, compétences, projets, plateformes, parcours, contact */
+:root{color-scheme:light dark;
+--deep:#00463c;--deep2:#003a32;--lime:#e6f5c8;--coral:#ff6f59;
+--bg:light-dark(#ffffff,#0b1714);--alt:light-dark(#f3f7ef,#0f1f1b);
+--ink:light-dark(#10201c,#e8f1ec);--mute:light-dark(#4b5e58,#9fb5ad);
+--line:light-dark(#dbe5df,#20352f);--card:light-dark(#ffffff,#122520);--accent:light-dark(#00695a,#8fe0c4)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;font-weight:700;line-height:1.08;text-wrap:balance;margin:0}
+h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:12px}
+h3{font-size:20px}
+p{margin:0 0 12px}
+a{color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(48px,6vw,96px) max(5vw,16px)}
+.alt{background:var(--alt)}
+.lead{color:var(--mute);max-width:62ch;font-size:17px}
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:var(--deep2);color:#fff;padding:0 max(5vw,16px)}
+nav .wrap{display:flex;align-items:center;gap:16px;min-height:60px;flex-wrap:wrap}
+nav .logo{font:700 18px "Inter Tight",sans-serif;color:#fff;text-decoration:none;margin-right:auto}
+nav .logo span{color:var(--coral)}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;overflow-x:auto}
+nav ul a{color:var(--lime);text-decoration:none;font-size:15px;padding:10px 12px;border-radius:8px;display:block;white-space:nowrap}
+nav ul a:hover,nav ul a:focus-visible{background:rgba(255,255,255,.1);outline:none}
+/* hero */
+.hero{background:var(--deep);color:#fff;padding:clamp(40px,6vw,88px) max(5vw,16px) clamp(48px,6vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.hero .tag{display:inline-block;background:rgba(230,245,200,.12);color:var(--lime);border:1px solid rgba(230,245,200,.3);border-radius:99px;padding:6px 14px;font-size:14px;margin-bottom:20px}
+.hero h1{font-size:clamp(40px,6vw,64px);margin-bottom:18px}
+.hero p{color:#d6ebe3;font-size:18px;max-width:52ch}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;font-weight:600;text-decoration:none;font-size:16px;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--lime);outline-offset:3px}
+.btn.main{background:var(--coral);color:#2a0d07}
+.btn.ghost{color:#fff;border:1.5px solid rgba(255,255,255,.45)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);font-size:15px;color:var(--lime)}
+.facts b{color:#fff;font-weight:600}
+.fig{position:relative;aspect-ratio:6/5;width:100%}
+.fig svg{position:absolute;inset:0;width:100%;height:100%}
+/* about */
+.two{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(24px,4vw,64px)}
+.goal{background:var(--deep);color:#fff;border-radius:16px;padding:28px}
+.goal h3{color:var(--lime);margin-bottom:12px}
+.goal ul{margin:0;padding-left:20px}.goal li{margin:6px 0;color:#d6ebe3}
+/* skills */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;margin-top:32px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.card h3{margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.card h3 svg{flex:none;color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.chips li{font-size:14px;padding:5px 11px;border-radius:99px;background:var(--alt);border:1px solid var(--line)}
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.filters button{font:500 15px Inter,sans-serif;min-height:44px;padding:0 16px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.filters button:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.proj{display:flex;flex-direction:column}
+.proj .meta{font-size:14px;color:var(--mute);margin-bottom:8px}
+.proj .status{display:inline-block;font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;margin-bottom:12px;background:light-dark(#e6f5c8,#1d3a2b);color:light-dark(#00463c,#cfeec0)}
+.proj .status.wip{background:light-dark(#ffe3dd,#3a1f1a);color:light-dark(#9a2a17,#ffb4a6)}
+.proj dl{margin:8px 0 16px;font-size:15px}
+.proj dt{font-weight:600;margin-top:10px}
+.proj dd{margin:2px 0 0;color:var(--mute)}
+.proj .chips{margin-top:auto}
+.note{font-size:14px;color:var(--mute);margin-top:16px}
+/* platforms */
+.plat{display:flex;gap:18px;align-items:flex-start}
+.plat .badge{flex:none;width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font:700 18px "Inter Tight",sans-serif;color:#fff}
+.plat a{font-weight:600}
+/* timeline */
+.tl{list-style:none;margin:32px 0 0;padding:0;border-left:2px solid var(--line);max-width:780px}
+.tl li{position:relative;padding:0 0 32px 28px}
+.tl li::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.tl li.next::before{border-color:var(--coral)}
+.tl .when{font-size:14px;font-weight:600;color:var(--accent);white-space:nowrap}
+.tl li.next .when{color:var(--coral)}
+.tl h3{margin:4px 0 6px}
+.tl p{color:var(--mute)}
+/* contact */
+.contact{background:var(--deep);color:#fff}
+.contact .lead{color:#d6ebe3}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px;margin-top:28px}
+.links a{display:flex;flex-direction:column;gap:2px;padding:18px 20px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#fff;text-decoration:none;min-height:44px}
+.links a:hover,.links a:focus-visible{background:rgba(255,255,255,.14);outline:none}
+.links small{color:var(--lime);font-size:14px}
+.links span{overflow-wrap:anywhere;font-weight:600}
+footer{background:var(--deep2);color:#9fc4b8;text-align:center;padding:24px 16px;font-size:14px}
+@media(max-width:860px){.hero .wrap,.two{grid-template-columns:minmax(0,1fr)}.fig{max-width:560px}}
+@media(max-width:600px){nav ul{width:100%;padding-bottom:8px}.hero h1{font-size:40px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.pkt{animation:move 4s linear infinite}
+@keyframes move{from{offset-distance:0%}to{offset-distance:100%}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Navigation principale">
+  <div class="wrap">
+    <a class="logo" href="#top">Timotey<span>.</span>Lamotte</a>
+    <ul>
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#plateformes">CTF</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="tag">Recherche une alternance Bac+5 cybersécurité · sept. 2027</span>
+      <h1>Timotey Lamotte</h1>
+      <p>Étudiant en BTS SIO option SISR et technicien réseaux &amp; systèmes en alternance. Je construis, j'administre et j'apprends à sécuriser des infrastructures — au travail comme sur mes labs perso.</p>
+      <div class="btns">
+        <a class="btn main" href="#projets">Voir mes projets</a>
+        <a class="btn ghost" href="#contact">Me contacter</a>
+      </div>
+      <div class="facts">
+        <span><b>Avignon (84)</b> · mobile Toulouse</span>
+        <span><b>Anglais</b> courant (C1)</span>
+        <span><b>Alternant</b> depuis 2025</span>
+        <span><b>TryHackMe</b> rang Platine</span>
+      </div>
+    </div>
+    <div class="fig" role="img" aria-label="Schéma réseau : postes du LAN reliés à un pare-feu, lui-même relié à Internet et à une DMZ avec un serveur ; un paquet malveillant est bloqué par le pare-feu.">
+      <svg viewBox="0 0 600 500" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b6b5d"/><stop offset="1" stop-color="#0d5246"/></linearGradient>
+          <linearGradient id="fw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8a77"/><stop offset="1" stop-color="#e5523d"/></linearGradient>
+          <g id="pc"><rect x="-34" y="-26" width="68" height="44" rx="6" fill="url(#g1)" stroke="#e6f5c8" stroke-opacity=".5"/><rect x="-26" y="-19" width="52" height="30" rx="3" fill="#073a32"/><rect x="-12" y="18" width="24" height="10" fill="#0d5246"/><rect x="-22" y="27" width="44" height="5" rx="2" fill="#1b6b5d"/></g>
+          <g id="srv"><rect x="-36" y="-50" width="72" height="100" rx="8" fill="url(#g1)" stroke="#e6f5c8" stroke-opacity=".5"/><rect x="-26" y="-38" width="52" height="16" rx="3" fill="#073a32"/><rect x="-26" y="-14" width="52" height="16" rx="3" fill="#073a32"/><rect x="-26" y="10" width="52" height="16" rx="3" fill="#073a32"/><circle cx="18" cy="-30" r="3" fill="#b9f27a"/><circle cx="18" cy="-6" r="3" fill="#b9f27a"/><circle cx="18" cy="18" r="3" fill="#ff6f59"/></g>
+        </defs>
+        <!-- zones -->
+        <rect x="16" y="40" width="200" height="420" rx="18" fill="#003a32" stroke="#e6f5c8" stroke-opacity=".18" stroke-dasharray="6 6"/>
+        <text x="36" y="72" fill="#e6f5c8" font-family="Inter" font-size="15" font-weight="600">LAN · VLAN 10</text>
+        <rect x="400" y="250" width="184" height="210" rx="18" fill="#003a32" stroke="#e6f5c8" stroke-opacity=".18" stroke-dasharray="6 6"/>
+        <text x="420" y="282" fill="#e6f5c8" font-family="Inter" font-size="15" font-weight="600">DMZ</text>
+        <!-- liens -->
+        <g stroke="#e6f5c8" stroke-opacity=".45" stroke-width="2.5" fill="none">
+          <path id="l1" d="M150 140 H300 V250"/><path id="l2" d="M150 250 H300"/><path id="l3" d="M150 360 H300 V250"/>
+          <path id="l4" d="M300 250 H492 V330"/><path id="l5" d="M492 60 V140 H300 V250"/>
+        </g>
+        <!-- internet -->
+        <g transform="translate(492 70)"><ellipse cx="0" cy="0" rx="74" ry="40" fill="#0d5246" stroke="#e6f5c8" stroke-opacity=".5"/><text x="0" y="6" text-anchor="middle" fill="#fff" font-family="Inter" font-size="16" font-weight="600">Internet</text></g>
+        <!-- postes -->
+        <use href="#pc" x="100" y="140"/><use href="#pc" x="100" y="250"/><use href="#pc" x="100" y="360"/>
+        <!-- pare-feu -->
+        <g transform="translate(300 250)">
+          <rect x="-48" y="-40" width="96" height="80" rx="12" fill="url(#fw)"/>
+          <g stroke="#2a0d07" stroke-opacity=".35" stroke-width="3"><path d="M-48 -13 H48 M-48 13 H48 M-16 -40 V-13 M16 -13 V13 M-16 13 V40"/></g>
+          <text x="0" y="64" text-anchor="middle" fill="#fff" font-family="Inter" font-size="15" font-weight="600">Pare-feu</text>
+        </g>
+        <!-- serveur DMZ -->
+        <use href="#srv" x="492" y="380"/>
+        <!-- paquets -->
+        <circle class="pkt" r="7" fill="#b9f27a" style="offset-path:path('M150 140 H300 V250 H492 V330')"/>
+        <circle class="pkt" r="7" fill="#b9f27a" style="offset-path:path('M150 360 H300 V250 H492 V330');animation-delay:-2s"/>
+        <circle class="pkt" r="7" fill="#ff6f59" style="offset-path:path('M492 110 V140 H300 V200');animation-duration:2.6s"/>
+        <g transform="translate(330 186)"><rect x="0" y="-16" width="96" height="30" rx="8" fill="#2a0d07" fill-opacity=".85"/><text x="48" y="4" text-anchor="middle" fill="#ffb4a6" font-family="Inter" font-size="14" font-weight="600">DROP ✕</text></g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="band" id="profil">
+  <div class="wrap two">
+    <div>
+      <h2>Le réseau d'abord, la sécurité ensuite — et toujours les deux.</h2>
+      <p class="lead">Après un Bac S option Sciences de l'ingénieur, j'ai choisi l'alternance pour apprendre sur le terrain. Au service informatique de la Communauté de communes Vallée des Baux-Alpilles (CCVBA), j'assure le support N1/N2, j'administre l'Active Directory et Microsoft 365, je maintiens le parc et le réseau, et j'applique les mises à jour de sécurité.</p>
+      <p class="lead">Depuis 2020, je pratique la cybersécurité offensive sur TryHackMe et Root-Me pour comprendre comment les systèmes que j'administre peuvent être attaqués — et comment les protéger.</p>
+    </div>
+    <aside class="goal">
+      <h3>Ce que je recherche</h3>
+      <ul>
+        <li>Une alternance en Bac+5 cybersécurité à partir de septembre 2027</li>
+        <li>Idéalement à Toulouse, dans l'aéronautique ou la défense</li>
+        <li>Des missions concrètes : durcissement, SOC, gestion des vulnérabilités</li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<section class="band alt" id="competences">
+  <div class="wrap">
+    <h2>Compétences</h2>
+    <p class="lead">Ce que j'utilise en entreprise, en cours et dans mes labs.</p>
+    <div class="grid" id="skills"></div>
+  </div>
+</section>
+
+<section class="band" id="projets">
+  <div class="wrap">
+    <h2>Projets</h2>
+    <p class="lead">Réalisations en alternance, projets de formation et projets perso. Chaque fiche décrit le contexte, ce que j'ai fait et ce que j'en retire.</p>
+    <div class="filters" role="group" aria-label="Filtrer les projets" id="filters"></div>
+    <div class="grid" id="projects"></div>
+  </div>
+</section>
+
+<section class="band alt" id="plateformes">
+  <div class="wrap">
+    <h2>Entraînement CTF</h2>
+    <p class="lead">Depuis 2020, je pratique la méthodologie de test d'intrusion sur Linux et Windows : reconnaissance, énumération, exploitation, élévation de privilèges.</p>
+    <div class="grid">
+      <div class="card plat">
+        <div class="badge" style="background:#c11111">THM</div>
+        <div><h3>TryHackMe</h3><p>Parcours Pre Security et Jr Penetration Tester · 95 salles terminées · rang Platine.</p><a href="https://tryhackme.com/p/timolamotte">Voir mon profil →</a></div>
+      </div>
+      <div class="card plat">
+        <div class="badge" style="background:#1f2a44">RM</div>
+        <div><h3>Root-Me</h3><p>Challenges web-serveur, réseau, cryptanalyse et forensic.</p><a href="https://www.root-me.org/Horuz?lang=fr">Voir mon profil →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="parcours">
+  <div class="wrap">
+    <h2>Parcours</h2>
+    <ol class="tl">
+      <li class="next"><span class="when">Sept. 2027 →</span><h3>Bac+5 cybersécurité en alternance</h3><p>Objectif : une formation d'ingénieur ou un mastère spécialisé en sécurité des systèmes d'information.</p></li>
+      <li><span class="when">2025 – 2027</span><h3>BTS SIO option SISR — CCI Vaucluse</h3><p>En alternance comme technicien systèmes et réseaux à la Communauté de communes Vallée des Baux-Alpilles (13).</p></li>
+      <li><span class="when">Lycée</span><h3>Baccalauréat S, option Sciences de l'ingénieur</h3><p>Lycée Philippe de Girard, Avignon.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band contact" id="contact">
+  <div class="wrap">
+    <h2>Me contacter</h2>
+    <p class="lead">Une offre d'alternance, une question sur un projet ? Je réponds rapidement.</p>
+    <div class="links">
+      <a href="mailto:timoteylamotte@gmail.com"><small>E-mail</small><span>timoteylamotte@gmail.com</span></a>
+      <a href="https://www.linkedin.com/in/timotey-lamotte-6b41a22ba/"><small>LinkedIn</small><span>linkedin.com/in/timotey-lamotte</span></a>
+      <a href="https://github.com/Psithroz"><small>GitHub</small><span>github.com/Psithroz</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="y">2026</span> Timotey Lamotte · Site statique, sans cookies ni traceurs.</footer>
+
+<script>
+{
+const ico={
+net:'<path d="M12 3v6M5 15v-3h14v3M5 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm14 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM12 9a2 2 0 1 0 0-4" />',
+sys:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>',
+sec:'<path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/>',
+dev:'<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>'};
+const svg=k=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ico[k]}</svg>`;
+const skills=[
+ {k:'net',t:'Réseaux & infrastructure',items:['TCP/IP','Switchs','Bornes Wi-Fi','Inventaire du parc','Virtualisation','Wireshark']},
+ {k:'sys',t:'Systèmes',items:['Windows','Linux','Active Directory','GPO','Microsoft 365','Support N1/N2']},
+ {k:'sec',t:'Cybersécurité',items:['Nmap','Burp Suite','Metasploit','John the Ripper','OWASP Top 10','Veille CVE','KeePass']},
+ {k:'dev',t:'Développement',items:['PHP','MariaDB / SQL','HTML / CSS','Android Studio','Obsidian']}];
+document.getElementById('skills').innerHTML=skills.map(s=>`<div class="card"><h3>${svg(s.k)}${s.t}</h3><ul class="chips">${s.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+
+const projects=[
+ {cat:'Alternance',t:'Base de connaissances du service informatique',when:'CCVBA · 2025-2026',status:'Déployé',
+  ctx:'Les procédures du service étaient dispersées et difficiles à retrouver.',
+  did:'Mise en place d\'Obsidian comme outil partagé pour centraliser les fiches de procédure et l\'information du service.',
+  learn:'Documenter, c\'est aussi sécuriser : une procédure écrite réduit les erreurs et facilite la reprise d\'activité.',
+  tags:['Obsidian','Documentation','ITSM']},
+ {cat:'Alternance',t:'Formation KeePass pour les agents',when:'CCVBA · 2025-2026',status:'Réalisé',
+  ctx:'Mots de passe réutilisés ou notés sur papier : un risque classique en collectivité.',
+  did:'Conception et animation d\'une formation à l\'usage de KeePass pour les agents de la collectivité.',
+  learn:'Adapter un discours technique à un public non technique — le facteur humain est la première ligne de défense.',
+  tags:['KeePass','Sensibilisation','Hygiène numérique']},
+ {cat:'Formation',t:'SISR Assistance — application de ticketing',when:'BTS SIO · 2026',status:'Réalisé',
+  ctx:'Projet noté : une application web de gestion de demandes d\'assistance.',
+  did:'Développement d\'un site PHP avec base MariaDB : authentification, gestion des tickets et des utilisateurs.',
+  learn:'Requêtes préparées contre l\'injection SQL, hachage des mots de passe, contrôle des accès par rôle.',
+  tags:['PHP','MariaDB','Sécurité web']},
+ {cat:'Défense',t:'Durcissement d\'un Active Directory',when:'Homelab · 2026-2027',status:'En cours',wip:true,
+  ctx:'Mesurer et réduire la surface d\'attaque d\'un domaine Windows proche de celui d\'une collectivité.',
+  did:'Domaine de test, audit avec PingCastle, corrections par GPO (LAPS, désactivation de LLMNR et NTLMv1, séparation des comptes d\'administration), puis nouvel audit.',
+  learn:'Un rapport avant/après chiffré, dans le prolongement de mon administration AD en alternance.',
+  tags:['Active Directory','GPO','PingCastle','LAPS']},
+ {cat:'Offensif',t:'Lab d\'attaque Active Directory',when:'Homelab · 2026-2027',status:'En cours',wip:true,
+  ctx:'Comprendre comment un attaquant compromet un domaine, pour mieux le défendre.',
+  did:'Domaine volontairement vulnérable (GOAD), cartographie avec BloodHound, Kerberoasting, AS-REP roasting, mouvements latéraux, puis contre-mesures pour chaque attaque.',
+  learn:'Relier chaque technique d\'attaque à sa détection et à sa correction côté défense.',
+  tags:['GOAD','BloodHound','Kerberos','Impacket']},
+ {cat:'Défense',t:'Durcissement d\'un serveur Linux',when:'Homelab · 2026-2027',status:'En cours',wip:true,
+  ctx:'Sécuriser un serveur Debian exposé selon les bonnes pratiques.',
+  did:'SSH par clés uniquement, fail2ban, pare-feu nftables, mises à jour automatiques, journalisation avec auditd ; score Lynis mesuré avant et après.',
+  learn:'Une démarche de durcissement reproductible et documentée, avec un résultat mesurable.',
+  tags:['Debian','SSH','fail2ban','nftables','Lynis']},
+ {cat:'Défense',t:'Accès distant sécurisé par VPN WireGuard',when:'Homelab · 2026-2027',status:'En cours',wip:true,
+  ctx:'Accéder à mon lab depuis l\'extérieur sans exposer ses services sur Internet.',
+  did:'Serveur WireGuard, gestion des clés par client, règles de pare-feu limitant l\'accès aux seuls réseaux du lab, configuration documentée.',
+  learn:'Comprendre le chiffrement, l\'authentification par clés et le filtrage d\'un accès distant.',
+  tags:['WireGuard','VPN','Pare-feu']},
+ {cat:'Offensif',t:'Write-ups de CTF',when:'TryHackMe · GitHub',status:'En cours',wip:true,
+  ctx:'Rédiger la démarche de résolution des salles TryHackMe terminées.',
+  did:'Pour chaque salle : reconnaissance, énumération, exploitation, élévation de privilèges, et contre-mesures pour chaque faille, publiés sur GitHub.',
+  learn:'Écrire oblige à comprendre chaque étape plutôt qu\'à suivre une solution.',
+  tags:['CTF','Pentest','Linux','Windows']},
+ {cat:'Scripts',t:'Scanner réseau en Python',when:'Projet perso · 2026-2027',status:'En cours',wip:true,
+  ctx:'Comprendre ce que fait Nmap en recodant ses fonctions de base.',
+  did:'Découverte des hôtes, scan de ports TCP en parallèle, récupération des bannières de services, export des résultats en CSV et JSON. Utilisé uniquement sur mon lab.',
+  learn:'Les sockets, le multithreading et le fonctionnement des protocoles réseau.',
+  tags:['Python','Sockets','Réseau']},
+ {cat:'Scripts',t:'Scripts PowerShell d\'audit AD',when:'Projet perso · 2026-2027',status:'En cours',wip:true,
+  ctx:'Repérer rapidement les comptes et droits à risque dans un domaine.',
+  did:'Scripts listant les comptes inactifs, les mots de passe qui n\'expirent jamais et les membres des groupes sensibles, avec un rapport HTML/CSV.',
+  learn:'Automatiser l\'audit et l\'administration Windows avec PowerShell.',
+  tags:['PowerShell','Active Directory','Automatisation']},
+ {cat:'Développement',t:'Application Android tout-en-un',when:'Projet perso · 2026',status:'En cours',wip:true,
+  ctx:'Regrouper dans une seule appli mes tâches, devoirs, habitudes et séances de sport.',
+  did:'Développement d\'une application Android avec Android Studio.',
+  learn:'Concevoir une appli de bout en bout, du besoin à l\'interface et au stockage des données.',
+  tags:['Android Studio','Mobile']}
+];
+
+const cats=['Tous',...new Set(projects.map(p=>p.cat))];
+const f=document.getElementById('filters'),g=document.getElementById('projects');
+const render=c=>{g.innerHTML=projects.filter(p=>c==='Tous'||p.cat===c).map(p=>`
+<article class="card proj">
+ <div class="meta">${p.cat} · ${p.when}</div>
+ <h3>${p.t}</h3>
+ <dl><dt>${p.wip?'Objectif':'Contexte'}</dt><dd>${p.ctx}</dd><dt>${p.wip?'Démarche':'Ce que j\'ai fait'}</dt><dd>${p.did}</dd><dt>${p.wip?'Ce que je vise':'Ce que j\'en retiens'}</dt><dd>${p.learn}</dd></dl>
+ <div><span class="status${p.wip?' wip':''}">${p.status}</span></div>
+ <ul class="chips">${p.tags.map(t=>`<li>${t}</li>`).join('')}</ul>
+</article>`).join('');
+ f.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===c));};
+f.innerHTML=cats.map(c=>`<button type="button" data-c="${c}">${c}</button>`).join('');
+f.addEventListener('click',e=>{const b=e.target.closest('button');if(b)render(b.dataset.c);});
+render('Tous');
+document.getElementById('y').textContent=new Date().getFullYear();
+}
+</script>
+</body>
+</html>
