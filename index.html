@@ -81,6 +81,8 @@ nav ul a:hover,nav ul a:focus-visible{background:rgba(255,255,255,.1);outline:no
 .proj dt{font-weight:600;margin-top:10px}
 .proj dd{margin:2px 0 0;color:var(--mute)}
 .proj .chips{margin-top:auto}
+.proj .doc{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:16px;padding:0 18px;border-radius:10px;background:var(--deep);color:#fff;font-weight:600;text-decoration:none;align-self:flex-start}
+.proj .doc:hover{background:var(--deep2)}.proj .doc:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
 .note{font-size:14px;color:var(--mute);margin-top:16px}
 /* platforms */
 .plat{display:flex;gap:18px;align-items:flex-start}
@@ -292,37 +294,37 @@ const projects=[
   did:'Développement d\'un site PHP avec base MariaDB : authentification, gestion des tickets et des utilisateurs.',
   learn:'Requêtes préparées contre l\'injection SQL, hachage des mots de passe, contrôle des accès par rôle.',
   tags:['PHP','MariaDB','Sécurité web']},
- {cat:'Défense',t:'Durcissement d\'un Active Directory',when:'Homelab · 2026-2027',status:'En cours',wip:true,
+ {cat:'Défense',t:'Durcissement d\'un Active Directory',doc:'https://github.com/Psithroz/ad-hardening-lab',when:'Homelab · 2026-2027',status:'En cours',wip:true,
   ctx:'Mesurer et réduire la surface d\'attaque d\'un domaine Windows proche de celui d\'une collectivité.',
   did:'Domaine de test, audit avec PingCastle, corrections par GPO (LAPS, désactivation de LLMNR et NTLMv1, séparation des comptes d\'administration), puis nouvel audit.',
   learn:'Un rapport avant/après chiffré, dans le prolongement de mon administration AD en alternance.',
   tags:['Active Directory','GPO','PingCastle','LAPS']},
- {cat:'Offensif',t:'Lab d\'attaque Active Directory',when:'Homelab · 2026-2027',status:'En cours',wip:true,
+ {cat:'Offensif',t:'Lab d\'attaque Active Directory',doc:'https://github.com/Psithroz/ad-hardening-lab',when:'Homelab · 2026-2027',status:'En cours',wip:true,
   ctx:'Comprendre comment un attaquant compromet un domaine, pour mieux le défendre.',
   did:'Domaine volontairement vulnérable (GOAD), cartographie avec BloodHound, Kerberoasting, AS-REP roasting, mouvements latéraux, puis contre-mesures pour chaque attaque.',
   learn:'Relier chaque technique d\'attaque à sa détection et à sa correction côté défense.',
   tags:['GOAD','BloodHound','Kerberos','Impacket']},
- {cat:'Défense',t:'Durcissement d\'un serveur Linux',when:'Homelab · 2026-2027',status:'En cours',wip:true,
+ {cat:'Défense',t:'Durcissement d\'un serveur Linux',doc:'https://github.com/Psithroz/linux-hardening',when:'Homelab · 2026-2027',status:'En cours',wip:true,
   ctx:'Sécuriser un serveur Debian exposé selon les bonnes pratiques.',
   did:'SSH par clés uniquement, fail2ban, pare-feu nftables, mises à jour automatiques, journalisation avec auditd ; score Lynis mesuré avant et après.',
   learn:'Une démarche de durcissement reproductible et documentée, avec un résultat mesurable.',
   tags:['Debian','SSH','fail2ban','nftables','Lynis']},
- {cat:'Défense',t:'Accès distant sécurisé par VPN WireGuard',when:'Homelab · 2026-2027',status:'En cours',wip:true,
+ {cat:'Défense',t:'Accès distant sécurisé par VPN WireGuard',doc:'https://github.com/Psithroz/wireguard-vpn',when:'Homelab · 2026-2027',status:'En cours',wip:true,
   ctx:'Accéder à mon lab depuis l\'extérieur sans exposer ses services sur Internet.',
   did:'Serveur WireGuard, gestion des clés par client, règles de pare-feu limitant l\'accès aux seuls réseaux du lab, configuration documentée.',
   learn:'Comprendre le chiffrement, l\'authentification par clés et le filtrage d\'un accès distant.',
   tags:['WireGuard','VPN','Pare-feu']},
- {cat:'Offensif',t:'Write-ups de CTF',when:'TryHackMe · GitHub',status:'En cours',wip:true,
+ {cat:'Offensif',t:'Write-ups de CTF',doc:'https://github.com/Psithroz/ctf-writeups',when:'TryHackMe · GitHub',status:'En cours',wip:true,
   ctx:'Rédiger la démarche de résolution des salles TryHackMe terminées.',
   did:'Pour chaque salle : reconnaissance, énumération, exploitation, élévation de privilèges, et contre-mesures pour chaque faille, publiés sur GitHub.',
   learn:'Écrire oblige à comprendre chaque étape plutôt qu\'à suivre une solution.',
   tags:['CTF','Pentest','Linux','Windows']},
- {cat:'Scripts',t:'Scanner réseau en Python',when:'Projet perso · 2026-2027',status:'En cours',wip:true,
+ {cat:'Scripts',t:'Scanner réseau en Python',doc:'https://github.com/Psithroz/python-port-scanner',when:'Projet perso · 2026-2027',status:'En cours',wip:true,
   ctx:'Comprendre ce que fait Nmap en recodant ses fonctions de base.',
   did:'Découverte des hôtes, scan de ports TCP en parallèle, récupération des bannières de services, export des résultats en CSV et JSON. Utilisé uniquement sur mon lab.',
   learn:'Les sockets, le multithreading et le fonctionnement des protocoles réseau.',
   tags:['Python','Sockets','Réseau']},
- {cat:'Scripts',t:'Scripts PowerShell d\'audit AD',when:'Projet perso · 2026-2027',status:'En cours',wip:true,
+ {cat:'Scripts',t:'Scripts PowerShell d\'audit AD',doc:'https://github.com/Psithroz/ps-ad-audit',when:'Projet perso · 2026-2027',status:'En cours',wip:true,
   ctx:'Repérer rapidement les comptes et droits à risque dans un domaine.',
   did:'Scripts listant les comptes inactifs, les mots de passe qui n\'expirent jamais et les membres des groupes sensibles, avec un rapport HTML/CSV.',
   learn:'Automatiser l\'audit et l\'administration Windows avec PowerShell.',
@@ -343,6 +345,7 @@ const render=c=>{g.innerHTML=projects.filter(p=>c==='Tous'||p.cat===c).map(p=>`
  <dl><dt>${p.wip?'Objectif':'Contexte'}</dt><dd>${p.ctx}</dd><dt>${p.wip?'Démarche':'Ce que j\'ai fait'}</dt><dd>${p.did}</dd><dt>${p.wip?'Ce que je vise':'Ce que j\'en retiens'}</dt><dd>${p.learn}</dd></dl>
  <div><span class="status${p.wip?' wip':''}">${p.status}</span></div>
  <ul class="chips">${p.tags.map(t=>`<li>${t}</li>`).join('')}</ul>
+ ${p.doc?`<a class="doc" href="${p.doc}" target="_blank" rel="noopener">Documentation →</a>`:''}
 </article>`).join('');
  f.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===c));};
 f.innerHTML=cats.map(c=>`<button type="button" data-c="${c}">${c}</button>`).join('');
